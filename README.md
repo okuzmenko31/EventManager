@@ -4,49 +4,58 @@
 
 Event Manager is a web application designed to manage event registrations. The project is containerized using Docker for easy setup and deployment.
 
-## Dependencies
+## Installation
 
-To run this project, you only need Docker. Docker Compose is used to manage multi-container applications.
+To get started with the Event Manager project, follow these steps:
 
-## Environment Variables
+1. **Clone the Repository**:
+   ```bash
+   git clone git@github.com:okuzmenko31/EventManager.git
+   ```
 
-Create a `.env` file in the root directory of your project with the following content. Ensure you replace sensitive information with your actual credentials or use placeholders for demonstration purposes.
+2. **Navigate to the Project Directory**:
+   ```bash
+   cd EventManager
+   ```
 
-```env
-# Application
-APP_PORT=8000
-DEBUG=True
-SECRET_KEY=your_secret_key
+3. **Set Up the Environment**:
+   Create a `.env` file in the root directory of the project with the following content. Replace sensitive information with your actual credentials or placeholders.
 
-# Database
-DB_ENGINE=django.db.backends.postgresql
-DB_NAME=event_manager
-DB_USER=postgres
-DB_PASSWORD=admin
-DB_HOST=postgresql
-DB_PORT=5432
+   ```env
+   # Application
+   APP_PORT=8000
+   DEBUG=True
+   SECRET_KEY=your_secret_key
 
-# Internationalization
-LANGUAGE_CODE=en-us
-TIME_ZONE=UTC
+   # Database
+   DB_ENGINE=django.db.backends.postgresql
+   DB_NAME=event_manager
+   DB_USER=postgres
+   DB_PASSWORD=admin
+   DB_HOST=postgresql
+   DB_PORT=5432
 
-# Migrations
-RUN_MIGRATIONS=True
+   # Internationalization
+   LANGUAGE_CODE=en-us
+   TIME_ZONE=UTC
 
-# RabbitMQ
-RABBITMQ_HOST=rabbitmq
-RABBITMQ_USER=guest
-RABBITMQ_PASSWORD=guest
-RABBITMQ_PORT=5672
-RABBITMQ_PORT_SECOND=15672
+   # Migrations
+   RUN_MIGRATIONS=True
 
-# SMTP
-EMAIL_HOST=smtp.gmail.com
-EMAIL_HOST_USER=example@gmail.com
-EMAIL_HOST_PASSWORD=password_placeholder
-EMAIL_PORT=587
-EMAIL_USE_TLS=True
-```
+   # RabbitMQ
+   RABBITMQ_HOST=rabbitmq
+   RABBITMQ_USER=guest
+   RABBITMQ_PASSWORD=guest
+   RABBITMQ_PORT=5672
+   RABBITMQ_PORT_SECOND=15672
+
+   # SMTP
+   EMAIL_HOST=smtp.gmail.com
+   EMAIL_HOST_USER=example@gmail.com
+   EMAIL_HOST_PASSWORD=password_placeholder
+   EMAIL_PORT=587
+   EMAIL_USE_TLS=True
+   ```
 
 ## Running the Application
 
@@ -146,4 +155,3 @@ Below are detailed descriptions of the commands available in the `Makefile`:
 - **`pip-list`**: List all installed Python packages.
 
 With this setup, you can easily manage and deploy the Event Manager application using Docker and Django's powerful tools. The provided Makefile simplifies common tasks, and comprehensive API documentation ensures seamless integration and usage.
-
