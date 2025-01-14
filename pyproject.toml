@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "event-manager"
+version = "0.1.0"
+description = "Event Manager API"
+authors = ["Oleg Kuzmenko <okuzmenko31us@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.13"
+django = "^5.1.4"
+djangorestframework = "^3.15.2"
+python-dotenv = "^1.0.1"
+drf-spectacular = "^0.28.0"
+django-jazzmin = "^3.0.1"
+psycopg = {version = "^3.2.3", extras = ["binary", "pool"]}
+djangorestframework-simplejwt = "^5.4.0"
+django-filter = "^24.3"
+celery = "^5.4.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

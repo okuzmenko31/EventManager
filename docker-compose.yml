@@ -1,0 +1,60 @@
+services:
+  postgresql:
+    image: "postgres:latest"
+    restart: always
+    container_name: "event_manager_postgresql"
+    volumes:
+      - event_manager_postgresql_data:/var/lib/postgresql/data
+    env_file:
+      - .env
+    environment:
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_HOST: ${DB_HOST}
+      POSTGRES_PORT: ${DB_PORT}
+
+  app:
+    build:
+      context: .
+    container_name: "event_manager_app"
+    depends_on:
+      - postgresql
+    ports:
+      - "8000:${APP_PORT}"
+    volumes:
+      - .:/event_manager_app/api
+    env_file:
+      - .env
+
+  rabbitmq:
+    image: "rabbitmq:3-management"
+    container_name: "event_manager_rabbitmq"
+    restart: always
+    ports:
+      - "5672:${RABBITMQ_PORT}"
+      - "15672:${RABBITMQ_PORT_SECOND}"
+    environment:
+      RABBITMQ_DEFAULT_USER: ${RABBITMQ_USER}
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASSWORD}
+    env_file:
+      - .env
+
+  worker:
+    restart: always
+    build:
+      context: .
+    container_name: "event_manager_worker"
+    entrypoint: celery
+    command: -A core worker --loglevel=info
+    links:
+      - rabbitmq
+    depends_on:
+      - rabbitmq
+      - postgresql
+      - app
+    volumes:
+      - .:/event_manager_app/api
+
+volumes:
+  event_manager_postgresql_data:
